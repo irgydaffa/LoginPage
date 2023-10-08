@@ -4,8 +4,10 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -63,21 +65,21 @@ fun LoginPage() {
     }
 
     val gradientBrush = Brush.horizontalGradient(
-        colors = listOf(Color(0xFF662D8C ), Color(0xFFED1E79)),
+        colors = listOf(Color(0xFF662D8C), Color(0xFFED1E79)),
         startX = 0F,
         endX = 1000F
     )
 
-    
+
     Column(
-        modifier = Modifier.fillMaxSize() .background(brush = gradientBrush) .padding(16.dp),
+        modifier = Modifier.fillMaxSize().background(brush = gradientBrush).padding(16.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 //        Text(text = "Email", modifier = Modifier.padding(start = 25.dp))
         OutlinedTextField(
             value = email,
-            label = {Text(text = "Email")},
+            label = { Text(text = "Email") },
             onValueChange = { email = it },
             modifier = Modifier
                 .fillMaxWidth()
@@ -87,16 +89,31 @@ fun LoginPage() {
 //        Text(text = "Password", modifier = Modifier.padding(start = 25.dp))
         OutlinedTextField(
             value = password,
-            label = {Text(text = "Password")},
+            label = { Text(text = "Password") },
             onValueChange = { password = it },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(15.dp),
             visualTransformation = PasswordVisualTransformation()
         )
-        Spacer(modifier = Modifier.height(10.dp))
-        Button(onClick = { /*TODO*/ }) {
-            Text(text = "Login")
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            // Register button (just text) on the right
+            Text(
+                text = "Don't Have Account?",
+                modifier = Modifier
+                    .clickable { /* Handle register button click here */ }
+                    .padding(8.dp)
+                    .background(Color.Transparent),
+                color = Color.Cyan
+            )
+            // Login button on the left
+            Button(onClick = { /* Handle login button click here */ }) {
+                Text(text = "Login")
+            }
         }
     }
 }
+
