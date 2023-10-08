@@ -3,6 +3,7 @@ package com.example.loginpage
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -25,6 +26,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -49,34 +53,50 @@ class MainActivity : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginPage(){
+fun LoginPage() {
     var email by remember {
-        mutableStateOf(TextFieldValue()) }
+        mutableStateOf(TextFieldValue())
+    }
 
     var password by remember {
-        mutableStateOf(TextFieldValue()) }
+        mutableStateOf(TextFieldValue())
+    }
 
-        Column (modifier = Modifier.fillMaxSize() , verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally){
-            Text(text = "Email", modifier = Modifier.padding(start = 25.dp))
-            OutlinedTextField(
-                value = email,
-                onValueChange = { email = it },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(15.dp),
-                singleLine = true
-            )
-            Text(text = "Password", modifier = Modifier.padding(start = 25.dp))
-            OutlinedTextField(
-                value = password,
-                onValueChange = { password = it },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(15.dp)
-            )
-            Spacer(modifier = Modifier.height(10.dp))
-            Button(onClick = { /*TODO*/ }) {
-                Text(text = "Login")
-            }
+    val gradientBrush = Brush.horizontalGradient(
+        colors = listOf(Color(0xFF662D8C ), Color(0xFFED1E79)),
+        startX = 0F,
+        endX = 1000F
+    )
+
+    
+    Column(
+        modifier = Modifier.fillMaxSize() .background(brush = gradientBrush) .padding(16.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+//        Text(text = "Email", modifier = Modifier.padding(start = 25.dp))
+        OutlinedTextField(
+            value = email,
+            label = {Text(text = "Email")},
+            onValueChange = { email = it },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(15.dp),
+            singleLine = true,
+        )
+//        Text(text = "Password", modifier = Modifier.padding(start = 25.dp))
+        OutlinedTextField(
+            value = password,
+            label = {Text(text = "Password")},
+            onValueChange = { password = it },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(15.dp),
+            visualTransformation = PasswordVisualTransformation()
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Button(onClick = { /*TODO*/ }) {
+            Text(text = "Login")
         }
+    }
 }
