@@ -100,16 +100,14 @@ fun LoginPage() {
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            // Register button (just text) on the right
             Text(
                 text = "Don't Have Account?",
                 modifier = Modifier
                     .clickable { /* Handle register button click here */ }
                     .padding(8.dp)
-                    .background(Color.Transparent),
-                color = Color.Cyan
+//                    .background(Color.Transparent),
+//                color = Color.Cyan
             )
-            // Login button on the left
             Button(onClick = { /* Handle login button click here */ }) {
                 Text(text = "Login")
             }
